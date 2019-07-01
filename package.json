@@ -1,0 +1,18 @@
+{
+  "name": "export-channel-sheet",
+  "version": "1.0.0",
+  "description": "export slack channel to google sheet",
+  "main": "index.js",
+  "scripts": {
+    "dev": "node index.js",
+    "start": "node index.js"
+  },
+  "author": "chensokheng",
+  "license": "ISC",
+  "dependencies": {
+    "@slack/web-api": "^5.0.1",
+    "array-to-google-sheets": "^1.0.1",
+    "cron": "^1.7.1",
+    "dotenv": "^8.0.0"
+  }
+}
