@@ -19,7 +19,7 @@ async function exportChannel() {
     try {
         const slackChannel = await webClient.channels.list({});
 
-        data = slackChannel.channels.filter(channel => !channel.is_private && !channel.is_archived).map(channel => [
+        data = slackChannel.channels.filter(channel => !channel.is_private || !channel.is_archived).map(channel => [
             channel.name,
             channel.id,
             url + channel.id,
@@ -47,16 +47,16 @@ async function pushToSheet() {
         console.log("error occur");
     }
 }
+pushToSheet();
+// const task = new CronJob('0 */1 * * * *', function () {
+//     pushToSheet();
+// });
+// task.start();
 
-const task = new CronJob('0 */1 * * * *', function () {
-    pushToSheet();
-});
-task.start();
-
-http.createServer((req, res) => {
-    res.writeHead(200, {
-        'Content-Type': 'text/html'
-    });
-    res.write('Export slack to google sheet');
-    res.end();
-}).listen(process.env.port);
+// http.createServer((req, res) => {
+//     res.writeHead(200, {
+//         'Content-Type': 'text/html'
+//     });
+//     res.write('Export slack to google sheet');
+//     res.end();
+// }).listen(process.env.port);
