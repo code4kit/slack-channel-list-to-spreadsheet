@@ -47,16 +47,16 @@ async function pushToSheet() {
         console.log("error occur");
     }
 }
-pushToSheet();
-// const task = new CronJob('0 */1 * * * *', function () {
-//     pushToSheet();
-// });
-// task.start();
 
-// http.createServer((req, res) => {
-//     res.writeHead(200, {
-//         'Content-Type': 'text/html'
-//     });
-//     res.write('Export slack to google sheet');
-//     res.end();
-// }).listen(process.env.port);
+const task = new CronJob('0 */1 * * * *', function () {
+    pushToSheet();
+});
+task.start();
+
+http.createServer((req, res) => {
+    res.writeHead(200, {
+        'Content-Type': 'text/html'
+    });
+    res.write('Export slack to google sheet');
+    res.end();
+}).listen(process.env.port);
