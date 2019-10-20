@@ -1,0 +1,26 @@
+version: 2
+jobs:
+   build:
+    working_directory: ~/app
+    docker:
+      - image: circleci/node:12.12.0
+    steps:
+      - checkout
+      - run:
+          name: update-yarn
+          command: 'sudo npm install -g yarn@latest'
+      - restore_cache:
+          key: yarn-packages-{{ checksum "yarn.lock" }}
+      - run:
+          name: yarn-install
+          command: yarn install --frozen-lockfile
+      - save_cache:
+          key: yarn-packages-{{ checksum "yarn.lock" }}
+          paths:
+            - ~/.cache/yarn
+      - run:
+          name: check coding format
+          command: yarn run standard
+      - run:
+          name: test
+          command: yarn test
