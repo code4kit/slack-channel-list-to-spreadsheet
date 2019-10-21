@@ -4,12 +4,14 @@
  * @fileOverview slack-ch-to-sheet.js
  *
  * @author waricoma
- * @version 1.0.0
+ * @version 1.0.1
  */
 
 const { WebClient } = require('@slack/web-api');
 const chValidation = require('./lib/ch-validation');
+const replaceMemberIdToMemberIdWithName = require('./lib/replace-member-id-to-member-id-with-name');
 const arrToSheetClient = require('arr-to-sheet-client');
+const moment = require('moment');
 
 process.on('message', (msg) => {
   console.log('start child process of slack-ch-to-sheet');
@@ -78,17 +80,29 @@ const main = async (
     return chValidation(channel.is_archived, channel.is_private, includeArchived, includePrivate);
   });
 
+  const usersList = await webClient.users.list();
+
   /**
    * 2d array for writing sheets of channels list
    * @type {[[string]]}
    */
   const arrOf2dForChannelsList = targetSlackChannels.map((channel) => {
+    const creatorInfo = usersList.members.filter((member) => {
+      return (member.id === channel.creator);
+    });
+
     return [
       channel.name,
       channel.id,
+      channel.num_members,
+      channel.creator,
+      creatorInfo[0].name,
+      channel.is_archived ? '◯' : '×',
+      channel.is_private ? '◯' : '×',
       `https://app.slack.com/client/${slackTeamInfo.team.id}/${channel.id}`,
-      channel.topic.value,
-      channel.purpose.value
+      replaceMemberIdToMemberIdWithName(channel.topic.value, usersList),
+      replaceMemberIdToMemberIdWithName(channel.purpose.value, usersList),
+      moment.unix(channel.created).format()
     ];
   });
 
@@ -96,9 +110,15 @@ const main = async (
   arrOf2dForChannelsList.unshift([
     'channel name',
     'channel id',
+    'members',
+    'creator id',
+    'creator name',
+    'is_archived',
+    'is_private',
     'channel url',
     'channel topic',
-    'channel purpose'
+    'channel purpose',
+    'channel created'
   ]);
 
   arrToSheetClient(

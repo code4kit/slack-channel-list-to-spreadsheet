@@ -26,6 +26,7 @@ const msgForSlackChToSheet = {
 
 // ⚠ you must set this path from execution place
 let slackChToSheet = childProcess.fork('./src/slack-ch-to-sheet');
+slackChToSheet.send(msgForSlackChToSheet);
 
 const cronTask = new CronJob(process.env.CRON, () => {
   slackChToSheet.kill();
