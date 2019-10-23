@@ -50,7 +50,7 @@ const main = async (
    * slack web client
    * @type {object}
    */
-  const webClient = new WebClient(slackToken);
+  const slackWebClient = new WebClient(slackToken);
 
   /**
    * slack team info
@@ -64,9 +64,16 @@ const main = async (
    */
   let slackChannelsList = {};
 
+  /**
+   * slack users list
+   * @type {object}
+   */
+  let slackUsersList = {};
+
   try {
-    slackTeamInfo = await webClient.team.info();
-    slackChannelsList = await webClient.channels.list({});
+    slackTeamInfo = await slackWebClient.team.info();
+    slackChannelsList = await slackWebClient.channels.list({});
+    slackUsersList = await slackWebClient.users.list();
   } catch (err) {
     console.error('err in getting data from slack');
     throw new Error(err);
@@ -80,14 +87,12 @@ const main = async (
     return chValidation(channel.is_archived, channel.is_private, includeArchived, includePrivate);
   });
 
-  const usersList = await webClient.users.list();
-
   /**
    * 2d array for writing sheets of channels list
    * @type {[[string]]}
    */
   const arrOf2dForChannelsList = targetSlackChannels.map((channel) => {
-    const creatorInfo = usersList.members.filter((member) => {
+    const creatorInfo = slackUsersList.members.filter((member) => {
       return (member.id === channel.creator);
     });
 
@@ -100,8 +105,8 @@ const main = async (
       channel.is_archived ? '◯' : '×',
       channel.is_private ? '◯' : '×',
       `https://app.slack.com/client/${slackTeamInfo.team.id}/${channel.id}`,
-      replaceMemberIdToMemberIdWithName(channel.topic.value, usersList),
-      replaceMemberIdToMemberIdWithName(channel.purpose.value, usersList),
+      replaceMemberIdToMemberIdWithName(channel.topic.value, slackUsersList),
+      replaceMemberIdToMemberIdWithName(channel.purpose.value, slackUsersList),
       moment.unix(channel.created).format()
     ];
   });
