@@ -4181,6 +4181,11 @@ node-environment-flags@1.0.5:
     object.getownpropertydescriptors "^2.0.3"
     semver "^5.7.0"
 
+node-fetch@^2.6.0:
+  version "2.6.0"
+  resolved "https://registry.yarnpkg.com/node-fetch/-/node-fetch-2.6.0.tgz#e633456386d4aa55863f676a7ab0daa8fdecb0fd"
+  integrity sha512-8dG4H5ujfvFiqDmVu9fQ5bOHUC15JMjMY/Zumv26oOvvVJjM67KF8koCWIabKQ1GJIa9r2mMZscBq/TbdOcmNA==
+
 node-pre-gyp@^0.12.0:
   version "0.12.0"
   resolved "https://registry.yarnpkg.com/node-pre-gyp/-/node-pre-gyp-0.12.0.tgz#39ba4bb1439da030295f899e3b520b7785766149"
@@ -4980,10 +4985,10 @@ readdirp@^2.2.1:
     micromatch "^3.1.10"
     readable-stream "^2.0.2"
 
-readme-md-generator@0.6.4:
-  version "0.6.4"
-  resolved "https://registry.yarnpkg.com/readme-md-generator/-/readme-md-generator-0.6.4.tgz#78adf2e8b19b6ef0df4956ed832d05ee5b02e9d0"
-  integrity sha512-p0G6H7ExIOzCW+1YtJnXs0mJ0MK59TNF9uEUqs2wUyM3OGaJBSXDW4bN2AjfQtEGKgvc3Rcq4Z/bFuIfPLioVw==
+readme-md-generator@0.7.0:
+  version "0.7.0"
+  resolved "https://registry.yarnpkg.com/readme-md-generator/-/readme-md-generator-0.7.0.tgz#04f9a127f376eb83201dc1cb44a4c7bd338d8f12"
+  integrity sha512-o29z1AzyXGJslbnmo6dGokB91vF5VgUp3u0QKHwibeGG9FPAtKzkU5ERwXDJoz6b+jYDVlb2OQREc7FIy01nOg==
   dependencies:
     boxen "^4.0.0"
     date-fns "^2.0.1"
@@ -4992,6 +4997,7 @@ readme-md-generator@0.6.4:
     inquirer "~7.0.0"
     load-json-file "^6.0.0"
     lodash "^4.17.11"
+    node-fetch "^2.6.0"
     ora "4.0.1"
     yargs "^14.0.0"
 
