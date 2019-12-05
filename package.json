@@ -42,7 +42,7 @@
     "cz-emoji": "1.1.2",
     "documentation": "12.1.4",
     "mocha": "6.2.2",
-    "readme-md-generator": "0.7.0",
+    "readme-md-generator": "1.0.0",
     "semistandard": "14.2.0"
   },
   "config": {
