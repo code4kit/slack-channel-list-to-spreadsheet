@@ -30,7 +30,7 @@
     "node": ">=12.11.1"
   },
   "dependencies": {
-    "@slack/web-api": "^5.0.1",
+    "@slack/web-api": "^6.0.0",
     "arr-to-sheet-client": "^1.0.1",
     "cron": "^1.7.1",
     "dotenv": "^8.0.0",
