@@ -34,7 +34,7 @@
     "arr-to-sheet-client": "^1.0.1",
     "cron": "^1.7.1",
     "dotenv": "^8.0.0",
-    "moment": "^2.24.0"
+    "moment": "^2.29.4"
   },
   "devDependencies": {
     "add-text-to-markdown": "2.0.0",
