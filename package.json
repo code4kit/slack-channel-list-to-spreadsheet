@@ -38,7 +38,7 @@
   },
   "devDependencies": {
     "add-text-to-markdown": "2.0.0",
-    "commitizen": "4.0.3",
+    "commitizen": "4.3.0",
     "cz-emoji": "1.2.0",
     "documentation": "12.1.4",
     "mocha": "7.0.0",
