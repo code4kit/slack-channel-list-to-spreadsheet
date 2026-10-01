@@ -32,7 +32,7 @@
   "dependencies": {
     "@slack/web-api": "^5.0.1",
     "arr-to-sheet-client": "^1.0.1",
-    "cron": "^1.7.1",
+    "cron": "^4.0.0",
     "dotenv": "^8.0.0",
     "moment": "^2.24.0"
   },
